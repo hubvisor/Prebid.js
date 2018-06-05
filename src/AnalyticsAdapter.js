@@ -2,8 +2,8 @@ import CONSTANTS from './constants';
 import { loadScript } from './adloader';
 import { ajax } from './ajax';
 
-const events = require('./events');
-const utils = require('./utils');
+import events from './events';
+import * as utils from './utils';
 
 const {
   EVENTS: {

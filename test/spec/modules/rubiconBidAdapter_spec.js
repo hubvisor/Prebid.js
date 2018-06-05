@@ -8,7 +8,7 @@ import {config} from 'src/config';
 import * as utils from 'src/utils';
 import find from 'core-js/library/fn/array/find';
 
-var CONSTANTS = require('src/constants.json');
+import CONSTANTS from 'src/constants.json';
 
 const INTEGRATION = `pbjs_lite_v$prebid.version$`; // $prebid.version$ will be substituted in by gulp in built prebid
 

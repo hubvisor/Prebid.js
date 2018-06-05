@@ -15,7 +15,6 @@
  * @api assertions
  */
 
-var util = require('util');
 exports.assertion = function(expected, msg) {
   var DEFAULT_MSG = 'Testing if attribute %s of <%s> equals "%s".';
 

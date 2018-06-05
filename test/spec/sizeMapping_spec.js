@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { resolveStatus, setSizeConfig } from 'src/sizeMapping';
 import includes from 'core-js/library/fn/array/includes';
 
-let utils = require('src/utils');
+import * as utils from 'src/utils';
 let deepClone = utils.deepClone;
 
 describe('sizeMapping', () => {

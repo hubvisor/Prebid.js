@@ -1,8 +1,8 @@
 import yuktamediaAnalyticsAdapter from 'modules/yuktamediaAnalyticsAdapter';
 import { expect } from 'chai';
-let adaptermanager = require('src/adaptermanager');
-let events = require('src/events');
-let constants = require('src/constants.json');
+import adaptermanager from 'src/adaptermanager';
+import events from 'src/events';
+import constants from 'src/constants.json';
 
 describe('YuktaMedia analytics adapter', () => {
   let xhr;

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { fireNativeTrackers, getNativeTargeting, nativeBidIsValid } from 'src/native';
-const utils = require('src/utils');
+import * as utils from 'src/utils';
 
 const bid = {
   native: {

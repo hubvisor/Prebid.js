@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import {getPriceBucketString, isValidPriceConfig} from 'src/cpmBucketManager';
-let cpmFixtures = require('test/fixtures/cpmInputsOutputs.json');
+import cpmFixtures from 'test/fixtures/cpmInputsOutputs.json';
 
 describe('cpmBucketManager', () => {
   it('getPriceBucketString function generates the correct price strings', () => {

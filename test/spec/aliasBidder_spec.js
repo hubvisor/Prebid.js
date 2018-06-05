@@ -1,11 +1,10 @@
-import { pbjsTestOnly } from 'test/helpers/pbjs-test-only';
+import pbjsTestOnly from 'test/helpers/pbjs-test-only';
+import 'src/prebid';
+
+import { assert, expect, should as createShould } from 'chai'
+const should = createShould()
 
 describe('Publisher API _ Alias Bidder', function () {
-  var assert = require('chai').assert;
-  var expect = require('chai').expect;
-  var should = require('chai').should();
-  var prebid = require('../../src/prebid');
-
   before(function () {
     var topSlotCode = '/19968336/header-bid-tag1';
     var topSlotSizes = [[728, 90], [970, 90]];

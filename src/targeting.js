@@ -1,11 +1,12 @@
-import { uniques, isGptPubadsDefined, getHighestCpm, getOldestHighestCpmBid, groupBy, isAdUnitCodeMatchingSlot, timestamp } from './utils';
 import { config } from './config';
 import { NATIVE_TARGETING_KEYS } from './native';
 import { auctionManager } from './auctionManager';
 import includes from 'core-js/library/fn/array/includes';
 
-const utils = require('./utils.js');
-var CONSTANTS = require('./constants.json');
+import * as utils from './utils.js';
+import CONSTANTS from './constants.json';
+
+const { uniques, isGptPubadsDefined, getHighestCpm, getOldestHighestCpmBid, groupBy, isAdUnitCodeMatchingSlot, timestamp } = utils
 
 var pbTargetingKeys = [];
 
@@ -186,7 +187,7 @@ export function newTargeting(auctionManager) {
   function getBidsReceived() {
     const bidsReceived = auctionManager.getBidsReceived()
       .filter(isUnusedBid)
-      .filter(exports.isBidExpired)
+      .filter(isBidExpired)
     ;
 
     return getHighestCpmBidsFromBidPool(bidsReceived, getOldestHighestCpmBid);

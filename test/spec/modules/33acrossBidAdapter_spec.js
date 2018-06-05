@@ -1,13 +1,14 @@
-const { userSync } = require('../../../src/userSync');
-const { config } = require('../../../src/config');
+import { userSync } from 'src/userSync';
+import { config } from 'src/config';
 
-const { expect } = require('chai');
+import { expect } from 'chai';
+import { spec } from 'modules/33acrossBidAdapter';
+
 const {
   isBidRequestValid,
   buildRequests,
-  interpretResponse,
-  getUserSyncs
-} = require('../../../modules/33acrossBidAdapter');
+  interpretResponse
+} = spec;
 
 describe('33acrossBidAdapter:', function () {
   const BIDDER_CODE = '33across';

@@ -11,7 +11,7 @@ import { isValidPriceConfig } from './cpmBucketManager';
 import find from 'core-js/library/fn/array/find';
 import includes from 'core-js/library/fn/array/includes';
 import { createHook } from 'src/hook';
-const utils = require('./utils');
+import * as utils from './utils';
 
 const DEFAULT_DEBUG = false;
 const DEFAULT_BIDDER_TIMEOUT = 3000;

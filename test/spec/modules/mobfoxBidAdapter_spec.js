@@ -1,8 +1,8 @@
-describe('mobfox adapter tests', () => {
-  const expect = require('chai').expect;
-  const utils = require('src/utils');
-  const adapter = require('modules/mobfoxBidAdapter');
+import { expect } from 'chai';
+import * as utils from 'src/utils';
+import * as adapter from 'modules/mobfoxBidAdapter';
 
+describe('mobfox adapter tests', () => {
   const bidRequest = [{
     code: 'div-gpt-ad-1460505748561-0',
     sizes: [[320, 480], [300, 250], [300, 600]],

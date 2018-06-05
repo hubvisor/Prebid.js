@@ -2,8 +2,7 @@
 import adapter from 'src/AnalyticsAdapter';
 import adaptermanager from 'src/adaptermanager';
 import CONSTANTS from 'src/constants.json';
-
-const utils = require('src/utils.js');
+import * as utils from 'src/utils.js';
 
 let realvuAnalyticsAdapter = adapter({
   global: 'realvuAnalytics',

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { spec } from 'modules/inskinBidAdapter';
 
-var bidFactory = require('src/bidfactory.js');
+import bidFactory from 'src/bidfactory.js';
 
 const ENDPOINT = 'https://mfad.inskinad.com/api/v2';
 

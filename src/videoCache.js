@@ -10,7 +10,7 @@
  */
 
 import { ajax } from './ajax';
-import { config } from '../src/config';
+import { config } from 'src/config';
 
 /**
  * @typedef {object} CacheableUrlBid
@@ -115,7 +115,7 @@ function shimStorageCallback(done) {
  * @param {videoCacheStoreCallback} [done] An optional callback which should be executed after
  *   the data has been stored in the cache.
  */
-export function store(bids, done) {
+function store(bids, done) {
   const requestData = {
     puts: bids.map(toStorageRequest)
   };
@@ -126,6 +126,8 @@ export function store(bids, done) {
   });
 }
 
-export function getCacheUrl(id) {
+function getCacheUrl(id) {
   return `${config.getConfig('cache.url')}?uuid=${id}`;
 }
+
+export default { store, getCacheUrl }

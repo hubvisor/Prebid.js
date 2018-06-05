@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {spec} from 'modules/conversantBidAdapter';
 import * as utils from 'src/utils';
 
-var Adapter = require('modules/conversantBidAdapter');
+import { spec as Adapter } from 'modules/conversantBidAdapter';
 
 describe('Conversant adapter tests', function() {
   const siteId = '108060';

@@ -1,8 +1,8 @@
 import { getAdServerTargeting } from 'test/fixtures/fixtures';
 import { expect } from 'chai';
 
-var assert = require('assert');
-var utils = require('src/utils');
+import assert from 'assert';
+import * as utils from 'src/utils';
 
 describe('Utils', function () {
   var obj_string = 's',

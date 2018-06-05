@@ -3,7 +3,7 @@ import adapter from 'src/AnalyticsAdapter';
 import adaptermanager from 'src/adaptermanager';
 import * as utils from 'src/utils';
 
-const CONSTANTS = require('src/constants.json');
+import CONSTANTS from 'src/constants.json';
 
 const analyticsType = 'endpoint';
 const EPL_HOST = 'https://ads.us.e-planning.net/hba/1/';

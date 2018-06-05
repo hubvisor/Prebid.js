@@ -48,22 +48,23 @@
  * @property {function(): void} callBids - sends requests to all adapters for bids
  */
 
-import { uniques, flatten, timestamp, adUnitsFilter, delayExecution, getBidderRequest } from './utils';
 import { getPriceBucketString } from './cpmBucketManager';
 import { getNativeTargeting } from './native';
-import { getCacheUrl, store } from './videoCache';
+import videoCache from './videoCache';
 import { Renderer } from 'src/Renderer';
 import { config } from 'src/config';
 import { userSync } from 'src/userSync';
 import { createHook } from 'src/hook';
 import find from 'core-js/library/fn/array/find';
 import includes from 'core-js/library/fn/array/includes';
+import * as utils from './utils';
+import adaptermanager from './adaptermanager';
+import events from './events';
+import CONSTANTS from './constants.json';
 
+const { getCacheUrl, store } = videoCache;
+const { uniques, flatten, timestamp, adUnitsFilter, delayExecution, getBidderRequest } = utils;
 const { syncUsers } = userSync;
-const utils = require('./utils');
-const adaptermanager = require('./adaptermanager');
-const events = require('./events');
-const CONSTANTS = require('./constants.json');
 
 export const AUCTION_STARTED = 'started';
 export const AUCTION_IN_PROGRESS = 'inProgress';

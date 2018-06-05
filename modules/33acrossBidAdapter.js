@@ -1,6 +1,6 @@
 import { userSync } from 'src/userSync'
-const { registerBidder } = require('../src/adapters/bidderFactory');
-const { config } = require('../src/config');
+import { registerBidder } from 'src/adapters/bidderFactory';
+import { config } from 'src/config';
 
 const BIDDER_CODE = '33across';
 const END_POINT = 'https://ssc.33across.com/api/v1/hb';
@@ -130,7 +130,7 @@ function interpretResponse(serverResponse, bidRequest) {
   return bidResponses;
 }
 
-const spec = {
+export const spec = {
   code: BIDDER_CODE,
   isBidRequestValid,
   buildRequests,
@@ -138,5 +138,3 @@ const spec = {
 }
 
 registerBidder(spec);
-
-module.exports = spec;

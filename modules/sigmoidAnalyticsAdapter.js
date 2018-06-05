@@ -4,8 +4,7 @@ import includes from 'core-js/library/fn/array/includes';
 import adapter from 'src/AnalyticsAdapter';
 import CONSTANTS from 'src/constants.json';
 import adaptermanager from 'src/adaptermanager';
-
-const utils = require('src/utils');
+import * as utils from 'src/utils';
 
 const url = 'https://kinesis.us-east-1.amazonaws.com/';
 const analyticsType = 'endpoint';

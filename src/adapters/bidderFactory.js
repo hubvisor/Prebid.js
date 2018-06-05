@@ -1,5 +1,5 @@
 import Adapter from 'src/adapter';
-import adaptermanager from 'src/adaptermanager';
+import * as adaptermanager from 'src/adaptermanager';
 import { config } from 'src/config';
 import bidfactory from 'src/bidfactory';
 import { userSync } from 'src/userSync';

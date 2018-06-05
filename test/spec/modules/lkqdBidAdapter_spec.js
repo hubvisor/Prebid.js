@@ -1,6 +1,6 @@
 import { spec } from 'modules/lkqdBidAdapter';
 import { newBidder } from 'src/adapters/bidderFactory';
-const { expect } = require('chai');
+import { expect } from 'chai';
 
 describe('LKQD Bid Adapter Test', () => {
   const adapter = newBidder(spec);

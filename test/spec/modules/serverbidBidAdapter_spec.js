@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { spec } from 'modules/serverbidBidAdapter';
 
-var bidFactory = require('src/bidfactory.js');
+import bidFactory from 'src/bidfactory.js';
 
 const ENDPOINT = 'https://e.serverbid.com/api/v2';
 const SMARTSYNC_CALLBACK = 'serverbidCallBids';

@@ -12,8 +12,7 @@ import {
 
 import { createHook } from 'src/hook';
 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
+import { assert, expect } from 'chai';
 
 describe('currency', function () {
   let fakeCurrencyFileServer;

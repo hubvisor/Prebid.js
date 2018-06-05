@@ -117,7 +117,7 @@ describe('AudienceNetwork adapter', () => {
     });
   });
 
-  describe('buildRequests', () => {
+  describe.only('buildRequests', () => {
     let isSafariBrowserStub;
     before(() => {
       isSafariBrowserStub = sinon.stub(utils, 'isSafariBrowser');

@@ -2,9 +2,13 @@ import adaptermanager from 'src/adaptermanager';
 import rubiconAnalyticsAdapter, { SEND_TIMEOUT } from 'modules/rubiconAnalyticsAdapter';
 import CONSTANTS from 'src/constants.json';
 import { config } from 'src/config';
+import events from 'src/events';
+import ajax from 'src/ajax';
+import * as utils from 'src/utils';
 
-let Ajv = require('ajv');
-let schema = require('./rubiconAnalyticsSchema.json');
+import Ajv from 'ajv';
+import schema from './rubiconAnalyticsSchema.json';
+
 let ajv = new Ajv({
   allErrors: true
 });
@@ -15,11 +19,6 @@ function validate(message) {
   validator(message);
   expect(validator.errors).to.deep.equal(null);
 }
-
-// using es6 "import * as events from 'src/events'" causes the events.getEvents stub not to work...
-let events = require('src/events');
-let ajax = require('src/ajax');
-let utils = require('src/utils');
 
 const {
   EVENTS: {

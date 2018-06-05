@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {spec} from 'modules/pubmaticBidAdapter';
 import * as utils from 'src/utils';
-const constants = require('src/constants.json');
+import constants from 'src/constants.json';
 
 describe('PubMatic adapter', () => {
   let bidRequests;

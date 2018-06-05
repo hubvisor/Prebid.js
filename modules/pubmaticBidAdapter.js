@@ -1,6 +1,6 @@
 import * as utils from 'src/utils';
 import { registerBidder } from 'src/adapters/bidderFactory';
-const constants = require('src/constants.json');
+import constants from 'src/constants.json';
 
 const BIDDER_CODE = 'pubmatic';
 const ENDPOINT = '//hbopenbid.pubmatic.com/translator?source=prebid-client';

@@ -1,6 +1,4 @@
-// var assert = require('assert');
-var assert = require('chai').assert;
-var utils = require('util');
+import { assert } from 'chai';
 
 module.exports = {
   'bidReceived not empty': function(browser) {

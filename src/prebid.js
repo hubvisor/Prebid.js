@@ -1,7 +1,6 @@
 /** @module pbjs */
 
 import { getGlobal } from './prebidGlobal';
-import { flatten, uniques, isGptPubadsDefined, adUnitsFilter, removeRequestId, getLatestHighestCpmBid } from './utils';
 import { listenMessagesFromCreative } from './secureCreatives';
 import { userSync } from 'src/userSync.js';
 import { loadScript } from './adloader';
@@ -10,14 +9,15 @@ import { auctionManager } from './auctionManager';
 import { targeting, getHighestCpmBidsFromBidPool, RENDERED, BID_TARGETING_SET } from './targeting';
 import { createHook } from 'src/hook';
 import includes from 'core-js/library/fn/array/includes';
+import CONSTANTS from './constants.json';
+import * as utils from './utils.js';
+import adaptermanager from './adaptermanager';
+import bidfactory from './bidfactory';
+import events from './events';
 
 const $$PREBID_GLOBAL$$ = getGlobal();
-const CONSTANTS = require('./constants.json');
-const utils = require('./utils.js');
-const adaptermanager = require('./adaptermanager');
-const bidfactory = require('./bidfactory');
-const events = require('./events');
 const { triggerUserSyncs } = userSync;
+const { flatten, uniques, isGptPubadsDefined, adUnitsFilter, removeRequestId, getLatestHighestCpmBid } = utils;
 
 /* private variables */
 const { ADD_AD_UNITS, BID_WON, REQUEST_BIDS, SET_TARGETING, AD_RENDER_FAILED } = CONSTANTS.EVENTS;

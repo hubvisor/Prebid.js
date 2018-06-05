@@ -7,12 +7,40 @@ var webpackConf = require('./webpack.conf');
 var path = require('path')
 var karmaConstants = require('karma').constants;
 
+function AllowMutateEsmExports() {}
+AllowMutateEsmExports.prototype.apply = function(compiler) {
+  /* Webpack 4 plugin version:
+  compiler.hooks.compilation.tap("AllowMutateEsmExports", function(compilation) {
+    compilation.mainTemplate.hooks.requireExtensions.tap("AllowMutateEsmExports", source =>
+      source.replace("configurable: false", "configurable: true")
+    );
+  });
+  */
+
+  compiler.plugin('compilation', function(compilation) {
+    compilation.mainTemplate.plugin('startup', function(source) {
+      return `
+      __webpack_require__.d = function(exports, name, getter) {
+        if(!__webpack_require__.o(exports, name)) {
+          Object.defineProperty(exports, name, {
+            configurable: true,
+            enumerable: true,
+            get: getter
+          });
+        }
+      };
+      ` + source
+    });
+  });
+}
+
 function newWebpackConfig(codeCoverage) {
   // Make a clone here because we plan on mutating this object, and don't want parallel tasks to trample each other.
   var webpackConfig = _.cloneDeep(webpackConf);
 
   // remove optimize plugin for tests
   webpackConfig.plugins.pop()
+  webpackConfig.plugins.push(new AllowMutateEsmExports())
 
   webpackConfig.devtool = 'inline-source-map';
 
@@ -24,6 +52,7 @@ function newWebpackConfig(codeCoverage) {
       test: /\.js$/
     })
   }
+
   return webpackConfig;
 }
 

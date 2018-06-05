@@ -4,7 +4,7 @@ import adaptermanager from 'src/adaptermanager';
 import * as ajax from 'src/ajax';
 import CONSTANTS from 'src/constants.json';
 
-const events = require('../../../src/events');
+import events from 'src/events';
 
 const DIRECT = {
   source: '(direct)',

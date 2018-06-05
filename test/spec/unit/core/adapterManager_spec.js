@@ -9,9 +9,9 @@ import { registerBidder } from 'src/adapters/bidderFactory';
 import { setSizeConfig } from 'src/sizeMapping';
 import find from 'core-js/library/fn/array/find';
 import includes from 'core-js/library/fn/array/includes';
-var s2sTesting = require('../../../../modules/s2sTesting');
-var events = require('../../../../src/events');
-const adloader = require('../../../../src/adloader');
+import events from 'src/events';
+import * as adloader from 'src/adloader';
+import * as s2sTesting from 'modules/s2sTesting';
 
 const CONFIG = {
   enabled: true,

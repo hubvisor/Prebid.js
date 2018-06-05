@@ -1,7 +1,9 @@
 import 'mocha';
 import chai from 'chai';
-import { getCacheUrl, store } from 'src/videoCache';
+import videoCache from 'src/videoCache';
 import { config } from 'src/config';
+
+const { getCacheUrl, store } = videoCache
 
 const should = chai.should();
 

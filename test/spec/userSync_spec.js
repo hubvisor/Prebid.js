@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { config } from 'src/config';
 // Use require since we need to be able to write to these vars
-const utils = require('../../src/utils');
-let { newUserSync } = require('../../src/userSync');
+import * as utils from 'src/utils';
+import { newUserSync } from 'src/userSync';
 
 describe('user sync', () => {
   let triggerPixelStub;

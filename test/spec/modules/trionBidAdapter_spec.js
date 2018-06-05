@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import * as utils from 'src/utils';
 import {spec, acceptPostMessage, getStorageData, setStorageData} from 'modules/trionBidAdapter';
-const CONSTANTS = require('src/constants.json');
-const adloader = require('src/adloader');
+import CONSTANTS from 'src/constants.json';
 
 const PLACEMENT_CODE = 'ad-tag';
 const BID_REQUEST_BASE_URL = 'https://in-appadvertising.com/api/bidRequest';

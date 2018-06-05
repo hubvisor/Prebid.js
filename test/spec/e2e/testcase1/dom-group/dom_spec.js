@@ -1,5 +1,3 @@
-// var assert = require('assert');
-
 module.exports = {
 
   'Test rendering ad div-2': function (browser) {

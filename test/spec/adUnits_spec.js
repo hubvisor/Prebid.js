@@ -1,8 +1,7 @@
-describe('Publisher API _ AdUnits', function () {
-  var assert = require('chai').assert;
-  var expect = require('chai').expect;
-  var pbjsTestOnly = require('../helpers/pbjs-test-only').pbjsTestOnly;
+import pbjsTestOnly from 'test/helpers/pbjs-test-only';
+import { assert, expect } from 'chai';
 
+describe('Publisher API _ AdUnits', function () {
   before(function () {
     var adUnits = [{
       code: '/1996833/slot-1',

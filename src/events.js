@@ -1,8 +1,8 @@
 /**
  * events.js
  */
-var utils = require('./utils');
-var CONSTANTS = require('./constants');
+import * as utils from './utils';
+import CONSTANTS from './constants';
 var slice = Array.prototype.slice;
 var push = Array.prototype.push;
 
@@ -17,7 +17,7 @@ var idPaths = CONSTANTS.EVENT_ID_PATHS;
 // keep a record of all events fired
 var eventsFired = [];
 
-module.exports = (function () {
+export default (function () {
   var _handlers = {};
   var _public = {};
 

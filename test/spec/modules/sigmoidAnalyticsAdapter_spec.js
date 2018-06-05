@@ -1,8 +1,8 @@
 import sigmoidAnalytic from 'modules/sigmoidAnalyticsAdapter';
 import { expect } from 'chai';
-let events = require('src/events');
-let adaptermanager = require('src/adaptermanager');
-let constants = require('src/constants.json');
+import events from 'src/events';
+import adaptermanager from 'src/adaptermanager';
+import constants from 'src/constants.json';
 
 describe('sigmoid Prebid Analytic', function () {
   let xhr;

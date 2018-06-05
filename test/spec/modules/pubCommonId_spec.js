@@ -11,8 +11,7 @@ import * as auctionModule from 'src/auction';
 import { registerBidder } from 'src/adapters/bidderFactory';
 import * as utils from 'src/utils';
 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
+import { expect, assert } from 'chai';
 
 const COOKIE_NAME = '_pubcid';
 const TIMEOUT = 2000;

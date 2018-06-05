@@ -3,6 +3,9 @@ import {spec} from 'modules/polluxBidAdapter';
 import {utils} from 'src/utils';
 import {newBidder} from 'src/adapters/bidderFactory';
 
+import URL from 'url-parse';
+import querystringify from 'querystringify';
+
 describe('POLLUX Bid Adapter tests', function () {
   // ad units setup
   const setup_single_bid = [{
@@ -177,8 +180,6 @@ describe('POLLUX Bid Adapter tests', function () {
   });
 
   it('TEST: verify url and query params', () => {
-    const URL = require('url-parse');
-    const querystringify = require('querystringify');
     const request = spec.buildRequests(setup_single_bid);
     const parsedUrl = new URL('https:' + request.url);
     expect(parsedUrl.origin).to.equal('https://adn.polluxnetwork.com');

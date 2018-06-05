@@ -1,5 +1,4 @@
-// var verify = require('verify');
-var util = require('../../common/utils.js');
+import * as util from '../../common/utils.js';
 
 module.exports = {
   'adequant ad rendering': function (browser) {

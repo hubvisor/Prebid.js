@@ -1,5 +1,5 @@
-var assert = require('assert');
-var utils = require('util');
+import assert from 'assert';
+import * as utils from 'src/utils';
 
 module.exports = {
   'AdserverTargeting Test Case 1': function (browser) {

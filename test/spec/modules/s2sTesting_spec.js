@@ -2,11 +2,11 @@ import { getSourceBidderMap, calculateBidSources, getSource } from 'modules/s2sT
 import { config } from 'src/config';
 import find from 'core-js/library/fn/array/find';
 
-var events = require('src/events');
-var CONSTANTS = require('src/constants.json');
-const BID_ADJUSTMENT = CONSTANTS.EVENTS.BID_ADJUSTMENT;
+import events from 'src/events';
+import CONSTANTS from 'src/constants.json';
+import { expect } from 'chai';
 
-var expect = require('chai').expect;
+const BID_ADJUSTMENT = CONSTANTS.EVENTS.BID_ADJUSTMENT;
 
 describe('s2sTesting', function () {
   let mathRandomStub;

@@ -3,7 +3,7 @@ import clone from 'just-clone';
 import find from 'core-js/library/fn/array/find';
 import includes from 'core-js/library/fn/array/includes';
 import { parse } from './url';
-const CONSTANTS = require('./constants');
+import CONSTANTS from './constants';
 
 var _loggingChecked = false;
 
@@ -28,8 +28,8 @@ try {
  *   map['something'] = 'something else';
  *   console.log(replaceTokenInString(str, map, '%%')); => "text it was subbed this text with something else"
  */
-exports.replaceTokenInString = function (str, map, token) {
-  this._each(map, function (value, key) {
+export function replaceTokenInString(str, map, token) {
+  _each(map, function (value, key) {
     value = (value === undefined) ? '' : value;
 
     var keyString = token + key.toUpperCase() + token;
@@ -50,12 +50,10 @@ var getIncrementalInteger = (function () {
   };
 })();
 
-function _getUniqueIdentifierStr() {
+// generate a random string (to be used as a dynamic JSONP callback)
+export function getUniqueIdentifierStr() {
   return getIncrementalInteger() + Math.random().toString(16).substr(2);
 }
-
-// generate a random string (to be used as a dynamic JSONP callback)
-exports.getUniqueIdentifierStr = _getUniqueIdentifierStr;
 
 /**
  * Returns a random v4 UUID of the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx,
@@ -63,13 +61,13 @@ exports.getUniqueIdentifierStr = _getUniqueIdentifierStr;
  * and y is replaced with a random hexadecimal digit from 8 to b.
  * https://gist.github.com/jed/982883 via node-uuid
  */
-exports.generateUUID = function generateUUID(placeholder) {
+export function generateUUID(placeholder) {
   return placeholder
     ? (placeholder ^ Math.random() * 16 >> placeholder / 4).toString(16)
     : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, generateUUID);
 };
 
-exports.getBidIdParameter = function (key, paramsObj) {
+export function getBidIdParameter(key, paramsObj) {
   if (paramsObj && paramsObj[key]) {
     return paramsObj[key];
   }
@@ -77,7 +75,7 @@ exports.getBidIdParameter = function (key, paramsObj) {
   return '';
 };
 
-exports.tryAppendQueryString = function (existingUrl, key, value) {
+export function tryAppendQueryString(existingUrl, key, value) {
   if (value) {
     return existingUrl += key + '=' + encodeURIComponent(value) + '&';
   }
@@ -87,7 +85,7 @@ exports.tryAppendQueryString = function (existingUrl, key, value) {
 
 // parse a query string object passed in bid params
 // bid params should be an object such as {key: "value", key1 : "value1"}
-exports.parseQueryStringParameters = function (queryObj) {
+export function parseQueryStringParameters(queryObj) {
   var result = '';
   for (var k in queryObj) {
     if (queryObj.hasOwnProperty(k)) { result += k + '=' + encodeURIComponent(queryObj[k]) + '&'; }
@@ -97,7 +95,7 @@ exports.parseQueryStringParameters = function (queryObj) {
 };
 
 // transform an AdServer targeting bids into a query string to send to the adserver
-exports.transformAdServerTargetingObj = function (targeting) {
+export function transformAdServerTargetingObj(targeting) {
   // we expect to receive targeting for a single slot at a time
   if (targeting && Object.getOwnPropertyNames(targeting).length > 0) {
     return getKeys(targeting)
@@ -183,25 +181,25 @@ export function parseSizesInput(sizeObj) {
 // into an AppNexus style string, (i.e. 300x250)
 export function parseGPTSingleSizeArray(singleSize) {
   // if we aren't exactly 2 items in this array, it is invalid
-  if (exports.isArray(singleSize) && singleSize.length === 2 && (!isNaN(singleSize[0]) && !isNaN(singleSize[1]))) {
+  if (isArray(singleSize) && singleSize.length === 2 && (!isNaN(singleSize[0]) && !isNaN(singleSize[1]))) {
     return singleSize[0] + 'x' + singleSize[1];
   }
 };
 
-exports.getTopWindowLocation = function() {
-  if (exports.inIframe()) {
+export function getTopWindowLocation() {
+  if (inIframe()) {
     let loc;
     try {
-      loc = exports.getAncestorOrigins() || exports.getTopFrameReferrer();
+      loc = getAncestorOrigins() || getTopFrameReferrer();
     } catch (e) {
       logInfo('could not obtain top window location', e);
     }
     if (loc) return parse(loc, {'decodeSearchAsString': true});
   }
-  return exports.getWindowLocation();
+  return getWindowLocation();
 }
 
-exports.getTopFrameReferrer = function () {
+export function getTopFrameReferrer() {
   try {
     // force an exception in x-domain environments. #1509
     window.top.location.toString();
@@ -220,29 +218,29 @@ exports.getTopFrameReferrer = function () {
   }
 };
 
-exports.getAncestorOrigins = function () {
+export function getAncestorOrigins() {
   if (window.document.location && window.document.location.ancestorOrigins &&
     window.document.location.ancestorOrigins.length >= 1) {
     return window.document.location.ancestorOrigins[window.document.location.ancestorOrigins.length - 1];
   }
 };
 
-exports.getWindowTop = function () {
+export function getWindowTop() {
   return window.top;
 };
 
-exports.getWindowSelf = function () {
+export function getWindowSelf() {
   return window.self;
 };
 
-exports.getWindowLocation = function () {
+export function getWindowLocation() {
   return window.location;
 };
 
-exports.getTopWindowUrl = function () {
+export function getTopWindowUrl() {
   let href;
   try {
-    href = this.getTopWindowLocation().href;
+    href = getTopWindowLocation().href;
   } catch (e) {
     href = '';
   }
@@ -250,7 +248,7 @@ exports.getTopWindowUrl = function () {
   return href;
 };
 
-exports.getTopWindowReferrer = function() {
+export function getTopWindowReferrer() {
   try {
     return window.top.document.referrer;
   } catch (e) {
@@ -258,13 +256,13 @@ exports.getTopWindowReferrer = function() {
   }
 };
 
-exports.logWarn = function (msg) {
+export function logWarn(msg) {
   if (debugTurnedOn() && console.warn) {
     console.warn('WARNING: ' + msg);
   }
 };
 
-exports.logInfo = function (msg, args) {
+export function logInfo(msg, args) {
   if (debugTurnedOn() && hasConsoleLogger()) {
     if (infoLogger) {
       if (!args || args.length === 0) {
@@ -276,7 +274,7 @@ exports.logInfo = function (msg, args) {
   }
 };
 
-exports.logMessage = function (msg) {
+export function logMessage(msg) {
   if (debugTurnedOn() && hasConsoleLogger()) {
     console.log('MESSAGE: ' + msg);
   }
@@ -286,13 +284,11 @@ function hasConsoleLogger() {
   return (window.console && window.console.log);
 }
 
-function hasConsoleError() {
+export function hasConsoleError() {
   return (window.console && window.console.error);
 }
 
-exports.hasConsoleLogger = hasConsoleLogger;
-
-var debugTurnedOn = function () {
+export function debugTurnedOn() {
   if (config.getConfig('debug') === false && _loggingChecked === false) {
     const debug = getParameterByName(CONSTANTS.DEBUG_MODE).toUpperCase() === 'TRUE';
     config.setConfig({ debug });
@@ -302,20 +298,18 @@ var debugTurnedOn = function () {
   return !!config.getConfig('debug');
 };
 
-exports.debugTurnedOn = debugTurnedOn;
-
 /**
  * Wrapper to console.error. Takes N arguments to log the same as console.error.
  */
-exports.logError = function () {
+export function logError() {
   if (debugTurnedOn() && hasConsoleError()) {
     console.error.apply(console, arguments);
   }
 };
 
-exports.createInvisibleIframe = function _createInvisibleIframe() {
+export function createInvisibleIframe() {
   var f = document.createElement('iframe');
-  f.id = _getUniqueIdentifierStr();
+  f.id = getUniqueIdentifierStr();
   f.height = 0;
   f.width = 0;
   f.border = '0px';
@@ -335,7 +329,7 @@ exports.createInvisibleIframe = function _createInvisibleIframe() {
  *   Check if a given parameter name exists in query string
  *   and if it does return the value
  */
-var getParameterByName = function (name) {
+export function getParameterByName(name) {
   var regexS = '[\\?&]' + name + '=([^&#]*)';
   var regex = new RegExp(regexS);
   var results = regex.exec(window.location.search);
@@ -346,15 +340,13 @@ var getParameterByName = function (name) {
   return decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-exports.getParameterByName = getParameterByName;
-
 /**
  * This function validates paramaters.
  * @param  {object[string]} paramObj          [description]
  * @param  {string[]} requiredParamsArr [description]
  * @return {bool}                   Bool if paramaters are valid
  */
-exports.hasValidBidRequest = function (paramObj, requiredParamsArr, adapter) {
+export function hasValidBidRequest(paramObj, requiredParamsArr, adapter) {
   var found = false;
 
   function findParam(value, key) {
@@ -366,10 +358,10 @@ exports.hasValidBidRequest = function (paramObj, requiredParamsArr, adapter) {
   for (var i = 0; i < requiredParamsArr.length; i++) {
     found = false;
 
-    this._each(paramObj, findParam);
+    _each(paramObj, findParam);
 
     if (!found) {
-      this.logError('Params are missing for bid request. One of these required paramaters are missing: ' + requiredParamsArr, adapter);
+      logError('Params are missing for bid request. One of these required paramaters are missing: ' + requiredParamsArr, adapter);
       return false;
     }
   }
@@ -378,7 +370,7 @@ exports.hasValidBidRequest = function (paramObj, requiredParamsArr, adapter) {
 };
 
 // Handle addEventListener gracefully in older browsers
-exports.addEventHandler = function (element, event, func) {
+export function addEventHandler(element, event, func) {
   if (element.addEventListener) {
     element.addEventListener(event, func, true);
   } else if (element.attachEvent) {
@@ -392,28 +384,28 @@ exports.addEventHandler = function (element, event, func) {
  * @param {String} _t type string (e.g., Array)
  * @return {Boolean} if object is of type _t
  */
-exports.isA = function (object, _t) {
+export function isA(object, _t) {
   return toString.call(object) === '[object ' + _t + ']';
 };
 
-exports.isFn = function (object) {
-  return this.isA(object, t_Fn);
+export function isFn(object) {
+  return isA(object, t_Fn);
 };
 
-exports.isStr = function (object) {
-  return this.isA(object, t_Str);
+export function isStr(object) {
+  return isA(object, t_Str);
 };
 
-exports.isArray = function (object) {
-  return this.isA(object, t_Arr);
+export function isArray(object) {
+  return isA(object, t_Arr);
 };
 
-exports.isNumber = function(object) {
-  return this.isA(object, t_Numb);
+export function isNumber(object) {
+  return isA(object, t_Numb);
 };
 
-exports.isPlainObject = function(object) {
-  return this.isA(object, t_Object);
+export function isPlainObject(object) {
+  return isA(object, t_Object);
 }
 
 /**
@@ -422,9 +414,9 @@ exports.isPlainObject = function(object) {
  * @param {*} object object to test
  * @return {Boolean} if object is empty
  */
-exports.isEmpty = function (object) {
+export function isEmpty(object) {
   if (!object) return true;
-  if (exports.isArray(object) || exports.isStr(object)) {
+  if (isArray(object) || isStr(object)) {
     return !(object.length > 0);
   }
 
@@ -440,8 +432,8 @@ exports.isEmpty = function (object) {
  * @param str string to test
  * @returns {boolean} if string is empty
  */
-exports.isEmptyStr = function(str) {
-  return this.isStr(str) && (!str || str.length === 0);
+export function isEmptyStr(str) {
+  return isStr(str) && (!str || str.length === 0);
 };
 
 /**
@@ -450,9 +442,9 @@ exports.isEmptyStr = function(str) {
  * @param {Array|Object} object
  * @param {Function(value, key, object)} fn
  */
-exports._each = function (object, fn) {
-  if (this.isEmpty(object)) return;
-  if (this.isFn(object.forEach)) return object.forEach(fn, this);
+export function _each (object, fn) {
+  if (isEmpty(object)) return;
+  if (isFn(object.forEach)) return object.forEach(fn, this);
 
   var k = 0;
   var l = object.length;
@@ -466,12 +458,12 @@ exports._each = function (object, fn) {
   }
 };
 
-exports.contains = function (a, obj) {
-  if (this.isEmpty(a)) {
+export function contains(a, obj) {
+  if (isEmpty(a)) {
     return false;
   }
 
-  if (this.isFn(a.indexOf)) {
+  if (isFn(a.indexOf)) {
     return a.indexOf(obj) !== -1;
   }
 
@@ -485,14 +477,8 @@ exports.contains = function (a, obj) {
   return false;
 };
 
-exports.indexOf = (function () {
-  if (Array.prototype.indexOf) {
-    return Array.prototype.indexOf;
-  }
-
-  // ie8 no longer supported
-  // return polyfills.indexOf;
-}());
+// ie8 no longer supported
+export const indexOf = Array.prototype.indexOf
 
 /**
  * Map an array or object into another array
@@ -501,11 +487,11 @@ exports.indexOf = (function () {
  * @param {Function(value, key, object)} callback
  * @return {Array}
  */
-exports._map = function (object, callback) {
-  if (this.isEmpty(object)) return [];
-  if (this.isFn(object.map)) return object.map(callback);
+export function _map(object, callback) {
+  if (isEmpty(object)) return [];
+  if (isFn(object.map)) return object.map(callback);
   var output = [];
-  this._each(object, function (value, key) {
+  _each(object, function (value, key) {
     output.push(callback(value, key, object));
   });
 
@@ -520,7 +506,7 @@ var hasOwn = function (objectToCheck, propertyToCheckFor) {
   }
 };
 
-exports.insertElement = function(elm, doc, target) {
+export function insertElement(elm, doc, target) {
   doc = doc || document;
   let elToAppend;
   if (target) {
@@ -537,14 +523,14 @@ exports.insertElement = function(elm, doc, target) {
   } catch (e) {}
 };
 
-exports.triggerPixel = function (url) {
+export function triggerPixel(url) {
   const img = new Image();
   img.src = url;
 };
 
-exports.callBurl = function({ source, burl }) {
+export function callBurl({ source, burl }) {
   if (source === CONSTANTS.S2S.SRC && burl) {
-    exports.triggerPixel(burl);
+    triggerPixel(burl);
   }
 };
 
@@ -553,13 +539,13 @@ exports.callBurl = function({ source, burl }) {
  * (though could be for other purposes)
  * @param {string} htmlCode snippet of HTML code used for tracking purposes
  */
-exports.insertHtmlIntoIframe = function(htmlCode) {
+export function insertHtmlIntoIframe(htmlCode) {
   if (!htmlCode) {
     return;
   }
 
   let iframe = document.createElement('iframe');
-  iframe.id = exports.getUniqueIdentifierStr();
+  iframe.id = getUniqueIdentifierStr();
   iframe.width = 0;
   iframe.height = 0;
   iframe.hspace = '0';
@@ -573,7 +559,7 @@ exports.insertHtmlIntoIframe = function(htmlCode) {
   iframe.frameBorder = '0';
   iframe.allowtransparency = 'true';
 
-  exports.insertElement(iframe, document, 'body');
+  insertElement(iframe, document, 'body');
 
   iframe.contentWindow.document.open();
   iframe.contentWindow.document.write(htmlCode);
@@ -585,12 +571,12 @@ exports.insertHtmlIntoIframe = function(htmlCode) {
  * @param  {string} url URL to be requested
  * @param  {string} encodeUri boolean if URL should be encoded before inserted. Defaults to true
  */
-exports.insertUserSyncIframe = function(url) {
-  let iframeHtml = this.createTrackPixelIframeHtml(url, false, 'allow-scripts allow-same-origin');
+export function insertUserSyncIframe(url) {
+  let iframeHtml = createTrackPixelIframeHtml(url, false, 'allow-scripts allow-same-origin');
   let div = document.createElement('div');
   div.innerHTML = iframeHtml;
   let iframe = div.firstChild;
-  exports.insertElement(iframe);
+  insertElement(iframe);
 };
 
 /**
@@ -598,7 +584,7 @@ exports.insertUserSyncIframe = function(url) {
  * @param  {string} url URL to be requested
  * @return {string}     HTML snippet that contains the img src = set to `url`
  */
-exports.createTrackPixelHtml = function (url) {
+export function createTrackPixelHtml(url) {
   if (!url) {
     return '';
   }
@@ -616,7 +602,7 @@ exports.createTrackPixelHtml = function (url) {
  * @param  {string} sandbox string if provided the sandbox attribute will be included with the given value
  * @return {string}     HTML snippet that contains the iframe src = set to `url`
  */
-exports.createTrackPixelIframeHtml = function (url, encodeUri = true, sandbox = '') {
+export function createTrackPixelIframeHtml(url, encodeUri = true, sandbox = '') {
   if (!url) {
     return '';
   }
@@ -627,7 +613,7 @@ exports.createTrackPixelIframeHtml = function (url, encodeUri = true, sandbox = 
     sandbox = `sandbox="${sandbox}"`;
   }
 
-  return `<iframe ${sandbox} id="${exports.getUniqueIdentifierStr()}"
+  return `<iframe ${sandbox} id="${getUniqueIdentifierStr()}"
       frameborder="0"
       allowtransparency="true"
       marginheight="0" marginwidth="0"
@@ -643,7 +629,7 @@ exports.createTrackPixelIframeHtml = function (url, encodeUri = true, sandbox = 
  * @param  {object} iframe reference
  * @return {object}        iframe `document` reference
  */
-exports.getIframeDocument = function (iframe) {
+export function getIframeDocument(iframe) {
   if (!iframe) {
     return;
   }
@@ -658,23 +644,23 @@ exports.getIframeDocument = function (iframe) {
       doc = iframe.contentDocument;
     }
   } catch (e) {
-    this.logError('Cannot get iframe document', e);
+    logError('Cannot get iframe document', e);
   }
 
   return doc;
 };
 
-exports.getValueString = function(param, val, defaultValue) {
+export function getValueString(param, val, defaultValue) {
   if (val === undefined || val === null) {
     return defaultValue;
   }
-  if (this.isStr(val)) {
+  if (isStr(val)) {
     return val;
   }
-  if (this.isNumber(val)) {
+  if (isNumber(val)) {
     return val.toString();
   }
-  this.logWarn('Unsuported type for param: ' + param + ' required type: String');
+  logWarn('Unsuported type for param: ' + param + ' required type: String');
 };
 
 export function uniques(value, index, arry) {
@@ -712,7 +698,7 @@ export function getBidderCodes(adUnits = $$PREBID_GLOBAL$$.adUnits) {
 }
 
 export function isGptPubadsDefined() {
-  if (window.googletag && exports.isFn(window.googletag.pubads) && exports.isFn(window.googletag.pubads().getSlots)) {
+  if (window.googletag && isFn(window.googletag.pubads) && isFn(window.googletag.pubads().getSlots)) {
     return true;
   }
 }
@@ -783,7 +769,7 @@ export function deepClone(obj) {
 
 export function inIframe() {
   try {
-    return exports.getWindowSelf() !== exports.getWindowTop();
+    return getWindowSelf() !== getWindowTop();
   } catch (e) {
     return true;
   }
@@ -808,7 +794,7 @@ export function checkCookieSupport() {
   }
 }
 export function cookiesAreEnabled() {
-  if (exports.checkCookieSupport()) {
+  if (checkCookieSupport()) {
     return true;
   }
   window.document.cookie = 'prebid.cookieTest';
@@ -1023,7 +1009,7 @@ export function deletePropertyFromObject(object, prop) {
  * @return {Object} bid
  */
 export function removeRequestId(bid) {
-  return exports.deletePropertyFromObject(bid, 'requestId');
+  return deletePropertyFromObject(bid, 'requestId');
 }
 
 /**

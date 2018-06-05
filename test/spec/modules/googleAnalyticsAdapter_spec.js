@@ -1,5 +1,5 @@
-var assert = require('assert');
-var ga = require('modules/googleAnalyticsAdapter');
+import assert from 'assert';
+import * as ga from 'modules/googleAnalyticsAdapter';
 
 describe('Ga', function () {
   describe('enableAnalytics', function () {

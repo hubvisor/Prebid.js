@@ -1,8 +1,8 @@
 import adomikAnalytics from 'modules/adomikAnalyticsAdapter';
 import {expect} from 'chai';
-let events = require('src/events');
-let adaptermanager = require('src/adaptermanager');
-let constants = require('src/constants.json');
+import events from 'src/events';
+import adaptermanager from 'src/adaptermanager';
+import constants from 'src/constants.json';
 
 describe('Adomik Prebid Analytic', function () {
   let sendEventStub;

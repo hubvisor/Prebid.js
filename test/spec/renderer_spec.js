@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Renderer } from 'src/Renderer';
-const adloader = require('../../src/adloader');
+import adloader from 'src/adloader';
 
 describe('Renderer: A renderer installed on a bid response', () => {
   let testRenderer1;

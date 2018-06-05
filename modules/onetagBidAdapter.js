@@ -1,6 +1,6 @@
 'use strict';
 
-const { registerBidder } = require('../src/adapters/bidderFactory');
+import { registerBidder } from 'src/adapters/bidderFactory';
 
 const ENDPOINT = 'https://onetag-sys.com/prebid-request';
 const BIDDER_CODE = 'onetag';

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { assert } from 'chai';
 import { newConfig } from 'src/config';
 
-const utils = require('src/utils');
+import * as utils from 'src/utils';
 
 let getConfig;
 let setConfig;

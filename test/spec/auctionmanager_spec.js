@@ -5,21 +5,21 @@ import { adjustBids } from 'src/auction';
 import * as auctionModule from 'src/auction';
 import { newBidder, registerBidder } from 'src/adapters/bidderFactory';
 import { config } from 'src/config';
-import * as store from 'src/videoCache';
+import store from 'src/videoCache';
 import * as ajaxLib from 'src/ajax';
 import find from 'core-js/library/fn/array/find';
-
-const adloader = require('../../src/adloader');
-var assert = require('assert');
+import * as adloader from 'src/adloader';
+import assert from 'assert';
 
 /* use this method to test individual files instead of the whole prebid.js project */
 
 // TODO refactor to use the spec files
-var utils = require('../../src/utils');
-var bidfactory = require('../../src/bidfactory');
-var fixtures = require('../fixtures/fixtures');
-var adaptermanager = require('src/adaptermanager');
-var events = require('src/events');
+import * as utils from 'src/utils';
+import bidfactory from 'src/bidfactory';
+import adaptermanager from 'src/adaptermanager';
+import events from 'src/events';
+
+import * as fixtures from '../fixtures/fixtures';
 
 function timestamp() {
   return new Date().getTime();

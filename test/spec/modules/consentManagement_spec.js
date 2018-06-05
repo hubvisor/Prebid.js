@@ -2,9 +2,7 @@ import {setConfig, requestBidsHook, resetConsentData, userCMP, consentTimeout, a
 import {gdprDataHandler} from 'src/adaptermanager';
 import * as utils from 'src/utils';
 import { config } from 'src/config';
-
-let assert = require('chai').assert;
-let expect = require('chai').expect;
+import { assert, expect } from 'chai';
 
 describe('consentManagement', function () {
   describe('setConfig tests:', () => {

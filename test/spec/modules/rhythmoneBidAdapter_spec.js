@@ -1,5 +1,5 @@
 import {spec} from '../../../modules/rhythmoneBidAdapter';
-var assert = require('assert');
+import assert from 'assert';
 
 describe('rhythmone adapter tests', function () {
   describe('auditBeacon', function() {

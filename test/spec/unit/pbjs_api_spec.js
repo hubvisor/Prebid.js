@@ -16,25 +16,23 @@ import * as auctionModule from 'src/auction';
 import { newBidder, registerBidder } from 'src/adapters/bidderFactory';
 import * as targetingModule from 'src/targeting';
 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
+// prebid sets a global, no exports, just import
+import 'src/prebid';
+import * as utils from 'src/utils';
+import * as bidfactory from 'src/bidfactory';
+import * as adloader from 'src/adloader';
+import adaptermanager from 'src/adaptermanager';
+import events from 'src/events';
+import * as adserver from 'src/adserver';
+import CONSTANTS from 'src/constants.json';
 
-var urlParse = require('url-parse');
-
-var prebid = require('src/prebid');
-var utils = require('src/utils');
-// var bidmanager = require('src/bidmanager');
-var bidfactory = require('src/bidfactory');
-var adloader = require('src/adloader');
-var adaptermanager = require('src/adaptermanager');
-var events = require('src/events');
-var adserver = require('src/adserver');
-var CONSTANTS = require('src/constants.json');
+import { assert, expect } from 'chai';
+import urlParse from 'url-parse';
 
 // These bid adapters are required to be loaded for the following tests to work
-require('modules/appnexusBidAdapter');
+import 'modules/appnexusBidAdapter';
 
-var config = require('test/fixtures/config.json');
+import config from 'test/fixtures/config.json';
 
 $$PREBID_GLOBAL$$ = $$PREBID_GLOBAL$$ || {};
 var adUnits = getAdUnits();
